@@ -1,31 +1,35 @@
+import { Suspense } from "react";
 import { Routes, Navigate, Route } from "react-router";
 import { NavLink } from "react-router-dom";
-import { LazyPage1, LazyPage2, LazyPage3 } from "../01-lazyload/pages";
 import Logo from '../logo.svg';
+import { routes } from './routes';
 
 export const Navigation =  () => {
   return (
-      <div className="main-layout">
-            <nav>
-                <img src={ Logo } alt="React Logo"/>
-                <ul>
-                    <li>
-                        <NavLink className={({isActive}) => isActive ? 'nav-active':''} to="/lazy1">Lazy1</NavLink>
-                    </li>
-                    <li>
-                        <NavLink className={({isActive}) => isActive ? 'nav-active':''} to="/lazy2">Lazy2</NavLink>
-                    </li>
-                    <li>
-                        <NavLink className={({isActive}) => isActive ? 'nav-active':''} to="/lazy3">Lazy3</NavLink>
-                    </li>
-                </ul>
-        </nav>
-        
-        <Routes>
-            <Route path="/lazy1" element={(<LazyPage1 />)} />
-            <Route path="/lazy2" element={(<LazyPage2 />)} />
-            <Route path="/lazy3" element={(<LazyPage3 />)} />
-        </Routes>
-    </div>
+    <Suspense fallback={(<h1>Cargando...</h1>)}>
+        <div className="main-layout">
+                <nav>
+                    <img src={ Logo } alt="React Logo"/>
+                    <ul>
+                        {/* FIXME: Con Routes */}
+                        { routes.map( ( {path, name} ) => (
+                            <li key={path}>
+                                <NavLink 
+                                className={({isActive}) => isActive ? 'nav-active':''} 
+                                to={path}>
+                                        {name}
+                                </NavLink>
+                            </li>
+                        ) )}
+                    </ul>
+            </nav>
+            
+            <Routes>
+                { routes.map( ( {path, Component} ) => (
+                        <Route key={path} path={path} element={(<Component />)} />
+                ) )}
+            </Routes>
+        </div>
+    </Suspense>
   );
 }
