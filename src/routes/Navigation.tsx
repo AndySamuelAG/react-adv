@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import Logo from '../logo.svg';
 import { routes } from './routes';
 
+
 export const Navigation =  () => {
   return (
     <Suspense fallback={(<h1>Cargando...</h1>)}>
@@ -11,12 +12,11 @@ export const Navigation =  () => {
                 <nav>
                     <img src={ Logo } alt="React Logo"/>
                     <ul>
-                        {/* FIXME: Con Routes */}
-                        { routes.map( ( {path, name} ) => (
-                            <li key={path}>
+                        { routes.map( ( {to, name} ) => (
+                            <li key={to}>
                                 <NavLink 
                                 className={({isActive}) => isActive ? 'nav-active':''} 
-                                to={path}>
+                                to={to}>
                                         {name}
                                 </NavLink>
                             </li>
