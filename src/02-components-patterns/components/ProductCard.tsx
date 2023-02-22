@@ -1,7 +1,7 @@
 import styles from '../styles/styles.module.css';
 import { useProduct } from '../hooks/useProduct';
 import { createContext } from 'react';
-import { Product, ProductContextProps, onChangeArgs } from '../interfaces/interfaces';
+import { Product, ProductContextProps, onChangeArgs, InitialValues, ProductCardHandlers } from '../interfaces/interfaces';
 
 // import { ProductImage } from './ProductImage';
 // import { ProductTitle } from './ProductTitle';
@@ -9,11 +9,13 @@ import { Product, ProductContextProps, onChangeArgs } from '../interfaces/interf
 
 export interface Props {
     product: Product;
-    children?: React.ReactElement | React.ReactElement[];
+    // children?: React.ReactElement | React.ReactElement[];
+    children: ( args: ProductCardHandlers ) => JSX.Element;
     className?: string; 
     style?: React.CSSProperties,
     onChange?: ( args: onChangeArgs ) => void;
     value?: number;
+    initialValues?: InitialValues;
 }
 
 
@@ -24,19 +26,27 @@ const { Provider } = ProductContext;
 
 
 
-export const ProductCard = ({ children, product, className, style, onChange, value }: Props) => {
+export const ProductCard = ({ children, product, className, style, onChange, value, initialValues }: Props) => {
 
-    const { counter, increaseBy } = useProduct( { onChange, product, value } );
+    const { counter, increaseBy, maxCount, isMaxCountReached, reset } = useProduct( { onChange, product, value, initialValues } );
 
     return (
         <Provider value={{
             counter,
             increaseBy,
-            product
+            product,
+            maxCount
             }}>
             <div className={ `${styles.productCard} ${className}` } style={ style }>
 
-                { children }
+                { children({
+                    count: counter,
+                    isMaxCountReached,
+                    maxCount: initialValues?.maxCount,
+                    product,
+                    increaseBy,
+                    reset
+                }) }
 
             </div>
         </Provider>
