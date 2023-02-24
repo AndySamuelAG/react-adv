@@ -24,7 +24,7 @@ for (const input of formJson) {
         }
 
         if(rule.type === 'email'){
-            schema = schema.email('Email is invalid');
+            schema = schema.email('Email is invalid'); 
         }
     }
 
