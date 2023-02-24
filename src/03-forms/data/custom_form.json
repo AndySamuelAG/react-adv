@@ -1,0 +1,73 @@
+[
+    {
+        "type": "text",
+        "name": "firstName",
+        "placeHolder": "John",
+        "label": "First Name",
+        "value": "",
+        "validations": [
+            {
+                "type": "required"
+            },
+            {
+                "type": "minLength"
+            }
+        ]
+    },
+    {
+        "type": "text",
+        "name": "lastName",
+        "placeHolder": "Doo",
+        "label": "Last Name",
+        "value": "",
+        "validations": [
+            {
+                "type": "required"
+            },
+            {
+                "type": "minLength",
+                "value": 5
+            }
+        ]
+    },
+    {
+        "type": "email",
+        "name": "email",
+        "placeHolder": "john@doo.com",
+        "label": "Email",
+        "value": "",
+        "validations": [
+            {
+                "type": "required"
+            },
+            {
+                "type": "email"
+            }
+        ]
+    },
+    {
+        "type": "select",
+        "name": "favoriteGame",
+        "label": "Favorite Game",
+        "value": "",
+        "options": [
+            {
+                "id": 1,
+                "label": "Resident Evil"
+            },
+            {
+                "id": 2,
+                "label": "Super Smash"
+            },
+            {
+                "id": 3,
+                "label": "Metal Gear"
+            }
+        ],
+        "validations": [
+            {
+                "type": "required"
+            }
+        ]
+    }
+]

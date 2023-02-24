@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router";
 import { NavLink } from "react-router-dom";
 
-import { FormikAbstraction, FormikBasicPage, FormikComponents, FormikYupPage, RegisterPage } from "../03-forms/pages";
+import { DynamicForm, FormikAbstraction, FormikBasicPage, FormikComponents, FormikYupPage, RegisterPage, RegisterFormikPage } from "../03-forms/pages";
 
 import Logo from '../logo.svg';
 
@@ -13,6 +13,9 @@ export const Navigation =  () => {
                 <ul>
                     <li>
                         <NavLink className={({isActive}) => isActive ? 'nav-active':''} to="/register">Register Page</NavLink>
+                    </li>
+                    <li>
+                        <NavLink className={({isActive}) => isActive ? 'nav-active':''} to="/register-formik">Register Formik</NavLink>
                     </li>
                     <li>
                         <NavLink className={({isActive}) => isActive ? 'nav-active':''} to="/formik-basic">Formik Basic</NavLink>
@@ -27,18 +30,19 @@ export const Navigation =  () => {
                         <NavLink className={({isActive}) => isActive ? 'nav-active':''} to="/formik-abstraction">Formik Abstraction</NavLink>
                     </li>
                     <li>
-                        <NavLink className={({isActive}) => isActive ? 'nav-active':''} to="/users">Users</NavLink>
+                        <NavLink className={({isActive}) => isActive ? 'nav-active':''} to="/dynamic-form">Dynamic Form</NavLink>
                     </li>
                 </ul>
         </nav>
         
         <Routes>
             <Route path="/register" element={<RegisterPage />} />
+            <Route path="/register-formik" element={<RegisterFormikPage />} />
             <Route path="/formik-basic" element={<FormikBasicPage />} />
             <Route path="/formik-yup" element={<FormikYupPage />} />
             <Route path="/formik-components" element={<FormikComponents />} />
             <Route path="/formik-abstraction" element={<FormikAbstraction />} />
-            <Route path="/users" element={(<h1>Users</h1>)} />
+            <Route path="/dynamic-form" element={ <DynamicForm /> } />
         </Routes>
     </div>
   );
